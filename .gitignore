@@ -1,0 +1,19 @@
+# Segredos — NUNCA commitar
+.streamlit/secrets.toml
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+
+# Dados locais (módulos futuros)
+data/uploads/
+data/vectorstore/
+
+# Sistema
+.DS_Store
+Thumbs.db
