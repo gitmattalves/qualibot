@@ -1,99 +1,181 @@
-# 🏭 QualiBot — Assistente de Questionários de Qualificação Industrial
+# 🏭 QualiBot — Assistente IA para Questionários de Qualificação Industrial
 
-Sistema de IA para resposta automatizada de questionários de qualificação de fornecedores industriais, com base em documentos técnicos e normas de qualidade.
+![Python](https://img.shields.io/badge/Python-3.12+-3776AB?style=flat&logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.35+-FF4B4B?style=flat&logo=streamlit&logoColor=white)
+![Google Gemini](https://img.shields.io/badge/Google%20Gemini-2.5%20Flash-4285F4?style=flat&logo=google&logoColor=white)
+![LangChain](https://img.shields.io/badge/LangChain-0.2+-1C3C3C?style=flat)
+![FAISS](https://img.shields.io/badge/FAISS-Vector%20Store-0467DF?style=flat)
+![Status](https://img.shields.io/badge/Status-Em%20desenvolvimento-yellow?style=flat)
 
-> Projeto de portfólio desenvolvido para demonstrar habilidades em IA aplicada,
-> RAG (Retrieval-Augmented Generation) e automação de processos corporativos.
+> Sistema de inteligência artificial para resposta automatizada a questionários de qualificação de fornecedores industriais, com base em documentos técnicos da empresa.
 
 ---
 
-## 🗺️ Módulos do Projeto
+## 📋 Sobre o Projeto
+
+Empresas industriais recebem questionários de qualificação de clientes internacionais com dezenas de perguntas técnicas sobre qualidade, segurança, meio ambiente e ESG. Responder esses questionários manualmente consome horas de trabalho de especialistas.
+
+O **QualiBot** automatiza esse processo utilizando **RAG (Retrieval-Augmented Generation)** — técnica que permite à IA responder com base nos documentos reais da empresa, citando a fonte de cada informação.
+
+### Comparativo: antes e depois
+
+| | Sem QualiBot | Com QualiBot |
+|---|---|---|
+| **Tempo de resposta** | Horas por questionário | Minutos |
+| **Base de informação** | Conhecimento geral do analista | Documentos oficiais da empresa |
+| **Rastreabilidade** | Nenhuma | Fonte citada em cada resposta |
+| **Consistência** | Varia por analista | Padronizada |
+
+---
+
+## 🗺️ Roadmap
 
 | Módulo | Descrição | Status |
 |--------|-----------|--------|
-| **1 — Chatbot base** | Interface web + integração com Gemini | ✅ Concluído |
-| 2 — Base de conhecimento | Upload de PDFs + busca semântica (RAG) | 🔜 Em breve |
-| 3 — Parser de questionários | Leitura automática de formulários | 🔜 Em breve |
-| 4 — Revisão e exportação | Interface de aprovação + export Excel/PDF | 🔜 Em breve |
+| **1 — Chatbot base** | Interface web + integração com Google Gemini | ✅ Concluído |
+| **2 — Base de conhecimento** | Upload de PDFs + busca semântica RAG | ✅ Concluído |
+| 3 — Parser de questionários | Leitura automática de formulários PDF/Excel | 🔜 Em desenvolvimento |
+| 4 — Revisão e exportação | Aprovação humana + exportação do documento final | 📋 Planejado |
+
+---
+
+## ✨ Funcionalidades atuais
+
+- 💬 **Chat especializado** em qualidade industrial com contexto técnico (ISO 9001, ISO 14001, FMEA, CEP, PPAP)
+- 📄 **Upload de múltiplos PDFs** — manuais, políticas, certificações, procedimentos
+- 🔍 **Busca semântica** — encontra respostas por significado, não por palavras-chave exatas
+- 📎 **Citação de fontes** — cada resposta indica o documento e o trecho utilizado
+- 🔄 **Multi-documento** — consulta simultânea em vários documentos indexados
+- 🛡️ **Reconhece limitações** — informa quando a resposta não está nos documentos carregados
+
+---
+
+## 🛠️ Stack Tecnológica
+
+| Tecnologia | Uso |
+|-----------|-----|
+| **Python 3.12+** | Linguagem principal |
+| **Streamlit** | Interface web |
+| **Google Gemini 2.5 Flash** | Modelo de linguagem (LLM) |
+| **google-genai SDK** | Integração com API do Gemini |
+| **LangChain** | Orquestração do pipeline RAG |
+| **FAISS** | Banco vetorial para busca semântica |
+| **Gemini Embeddings** | Conversão de texto em vetores |
+| **PyMuPDF** | Extração de texto de PDFs |
 
 ---
 
 ## 🚀 Como rodar localmente
 
-### 1. Clone o repositório
+### Pré-requisitos
+- Python 3.12+ instalado ([python.org](https://python.org/downloads))
+- Conta Google com acesso ao [Google AI Studio](https://aistudio.google.com)
+
+### Instalação
+
 ```bash
-git clone https://github.com/seu-usuario/qualibot.git
+# 1. Clone o repositório
+git clone https://github.com/gitmattalves/qualibot.git
 cd qualibot
-```
 
-### 2. Crie e ative o ambiente virtual
-```bash
+# 2. Crie e ative o ambiente virtual
 python -m venv venv
+venv\Scripts\activate       # Windows
+# source venv/bin/activate  # Mac/Linux
 
-# Windows
-venv\Scripts\activate
-
-# Mac/Linux
-source venv/bin/activate
-```
-
-### 3. Instale as dependências
-```bash
+# 3. Instale as dependências
 pip install -r requirements.txt
 ```
 
-### 4. Configure sua API Key do Gemini
-- Acesse [Google AI Studio](https://aistudio.google.com/app/apikey)
-- Crie uma API Key gratuita
-- Edite o arquivo `.streamlit/secrets.toml`:
+### Configuração da API Key
+
+1. Acesse [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
+2. Crie uma API Key gratuita
+3. Edite o arquivo `.streamlit/secrets.toml`:
+
 ```toml
 GEMINI_API_KEY = "sua_chave_aqui"
 ```
 
-### 5. Execute a aplicação
+### Execução
+
 ```bash
-streamlit run app.py
+streamlit run app.py --server.headless true
 ```
 
 Acesse `http://localhost:8501` no navegador.
 
 ---
 
-## 🏗️ Estrutura do Projeto
+## 📁 Estrutura do Projeto
 
 ```
 qualibot/
-├── app.py                  # Aplicação principal (Streamlit)
-├── requirements.txt        # Dependências Python
+├── app.py                      # Aplicação principal (Streamlit)
+├── requirements.txt            # Dependências Python
 ├── .gitignore
+├── README.md
 ├── .streamlit/
-│   └── secrets.toml        # API Keys (não vai pro GitHub)
+│   └── secrets.toml            # API Keys (não vai ao GitHub)
 └── src/
     ├── __init__.py
-    ├── config.py           # System prompt e configurações
-    └── gemini_client.py    # Comunicação com a API do Gemini
+    ├── config.py               # System prompts e configurações
+    ├── gemini_client.py        # Comunicação com API do Gemini
+    ├── document_loader.py      # Leitura e chunking de PDFs
+    └── vector_store.py         # Embeddings e busca semântica (FAISS)
 ```
 
 ---
 
-## 🛠️ Stack Tecnológica
+## 💡 Como usar
 
-- **Python 3.11+**
-- **Streamlit** — interface web
-- **Google Gemini 1.5 Flash** — modelo de linguagem
-- **google-generativeai** — SDK oficial do Gemini
+### Modo geral (sem documentos)
+Faça perguntas diretamente sobre qualidade industrial, normas ISO, FMEA, CEP e ESG. O bot responde com base no conhecimento geral do Gemini.
+
+### Modo RAG (com documentos)
+1. Faça upload dos seus PDFs na coluna esquerda (manuais, políticas, certificações)
+2. Aguarde a indexação — o sistema divide o documento em trechos e gera os embeddings
+3. Faça perguntas normalmente — o bot buscará as respostas nos seus documentos e citará a fonte
+
+### Exemplos de perguntas
+```
+"Qual é o número do certificado ISO 9001 e quando vence?"
+"Qual foi o PPM externo alcançado em 2024?"
+"A empresa possui PGRS? Qual é o protocolo?"
+"Descreva o processo de controle de qualidade na linha de produção."
+"Qual é a meta de redução de CO₂ para 2025?"
+```
 
 ---
 
-## 📋 Exemplos de Perguntas
+## 🧠 Como funciona o RAG
 
-O assistente responde perguntas como:
+```
+PDF Upload → Extração de texto → Chunking (800 chars) → Embeddings (Gemini)
+                                                                    ↓
+Pergunta → Embedding da pergunta → Busca semântica FAISS → Top 3 chunks
+                                                                    ↓
+                                    Chunks + Pergunta → Gemini → Resposta com fonte
+```
 
-- *"A empresa possui certificação ISO 9001? Qual é a validade?"*
-- *"Quais são os procedimentos de controle de qualidade utilizados no processo produtivo?"*
-- *"A empresa possui política de sustentabilidade e metas de redução de CO₂?"*
-- *"Descreva o processo de qualificação de fornecedores da empresa."*
-- *"A empresa realiza auditorias internas de segurança? Com qual frequência?"*
+---
+
+## ⚠️ Observações
+
+- O arquivo `.streamlit/secrets.toml` **nunca deve ser commitado** — já está no `.gitignore`
+- O banco vetorial FAISS é armazenado **em memória** — é recriado a cada sessão
+- PDFs escaneados sem OCR não são suportados nesta versão
+- Compatível com Python 3.12. Python 3.14 funciona com aviso de compatibilidade do Pydantic
+
+---
+
+## 👤 Autor
+
+**Mateus Alves**
+Analista de Dados | BI & Automação | IA Aplicada
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Mateus%20Alves-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/mateus-alves-92ab9784/)
+[![GitHub](https://img.shields.io/badge/GitHub-gitmattalves-181717?style=flat&logo=github)](https://github.com/gitmattalves)
 
 ---
 
